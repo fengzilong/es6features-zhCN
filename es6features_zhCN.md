@@ -5,7 +5,7 @@ ECMAScript 6，也被称做ECMAScript 2015，是ECMAScript标准的下一个版�
 前往[ES6标准草案](https://people.mozilla.org/~jorendorff/es6-draft.html)查看ECMAScript 6的所有细节
 
 ES6包括以下特性
-- [arrows 箭头函数](#arrow)
+- [arrows 箭头函数](#arrows)
 - [class 类](#classes)
 - [enhanced object literals 增强的对象字面量](#enhanced-object-literals)
 - [template string 模板字符串](#template-string)
