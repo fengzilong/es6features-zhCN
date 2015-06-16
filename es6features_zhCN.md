@@ -56,6 +56,33 @@ var bob = {
 ```
 
 ### Class 类
+ES6中提供了一个基于原型的面向对象模式的类声明的语法糖。这种简单的声明方式使得类模式变得更加容易使用，也促进了类之间的协作关系。类支持原型继承、调用父方法、实例方法、静态方法和构造函数。
+
+```JavaScript
+class SkinnedMesh extends THREE.Mesh {
+  constructor(geometry, materials) {
+    super(geometry, materials);
+
+    this.idMatrix = SkinnedMesh.defaultMatrix();
+    this.bones = [];
+    this.boneMatrices = [];
+    //...
+  }
+  update(camera) {
+    //...
+    super.update();
+  }
+  get boneCount() {
+    return this.bones.length;
+  }
+  set matrixType(matrixType) {
+    this.idMatrix = SkinnedMesh[matrixType]();
+  }
+  static defaultMatrix() {
+    return new THREE.Matrix4();
+  }
+}
+```
 
 
 
