@@ -200,7 +200,44 @@ function f() {
 }
 ```
 
-### Iterators + For..Of
+### Iterators + For..Of 迭代器和For..Of
+Iterator对象让javascript拥有了像CLR IEnumerable和Java Iterable一样自定义迭代器的能力。将`for..in`转换成基于迭代器的自定义遍历的`for..of`形式。不需要实现一个数组，启用类似LINQ中的惰性设计模式。
+
+```JavaScript
+let fibonacci = {
+  [Symbol.iterator]() {
+    let pre = 0, cur = 1;
+    return {
+      next() {
+        [pre, cur] = [cur, pre + cur];
+        return { done: false, value: cur }
+      }
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // truncate the sequence at 1000
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+```
+
+Iteration基于[鸭子类型](https://en.wikipedia.org/wiki/Duck_typing)的接口(以下使用[TypeScript](http://typescriptlang.org)的语法，仅供解释用)
+
+```TypeScript
+interface IteratorResult {
+  done: boolean;
+  value: any;
+}
+interface Iterator {
+  next(): IteratorResult;
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+```
+
+### Generators 生成器
 TODO
-
-
