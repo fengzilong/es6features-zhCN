@@ -156,7 +156,7 @@ var [a = 1] = [];
 a === 1;
 ```
 
-### Default + Rest + Spread 默认参数 + 不定参数 + 参数展开
+### Default + Rest + Spread 默认参数 + 剩余参数 + 参数展开
 支持被调用函数设置参数的默认值。在函数调用时使用`...`可以将一个数组展开后作为参数传入。在定义函数时使用`...`可以将传入的剩余参数转成一个数组。不定参数在很多情形下可以取代arguments的使用。
 
 ```JavaScript
@@ -182,7 +182,7 @@ f(...[1,2,3]) == 6
 ```
 
 ### Let + Const let和const关键字
-let和const都是块级作用域的绑定构造。`let`是新的`var`。`const`是单次赋值的。`let`和`const`都有静态限制，可以避免在声明前使用
+let和const都是块级作用域的声明方式。`let`是新的`var`。`const`是单次赋值的。`let`和`const`都有静态限制，可以避免在声明前使用
 
 ```JavaScript
 function f() {
@@ -241,3 +241,97 @@ interface Iterable {
 
 ### Generators 生成器
 TODO
+
+### Unicode
+TODO
+
+### Modules 模块
+ES支持从语言层面上来使用模块进行组件定义。编写方式来自流行的Javascript模块加载器(AMD，CommonJS)。运行时的行为由宿主的加载器定义。内部使用了隐式的异步模型 - 在依赖的模块不可用或没处理前，当前模块的代码不会执行
+
+```JavaScript
+// lib/math.js
+export function sum(x, y) {
+  return x + y;
+}
+export var pi = 3.141593;
+```
+```JavaScript
+// app.js
+import * as math from "lib/math";
+alert("2π = " + math.sum(math.pi, math.pi));
+```
+```JavaScript
+// otherApp.js
+import {sum, pi} from "lib/math";
+alert("2π = " + sum(pi, pi));
+```
+
+增加了`export default`和`export *`这些额外特性
+
+```JavaScript
+// lib/mathplusplus.js
+export * from "lib/math";
+export var e = 2.71828182846;
+export default function(x) {
+    return Math.log(x);
+}
+```
+```JavaScript
+// app.js
+import ln, {pi, e} from "lib/mathplusplus";
+alert("2π = " + ln(e)*pi*2);
+```
+
+### Module Loaders 模块加载器
+模块加载器支持：
+- 动态加载
+- 状态隔离
+- 全局命名空间隔离
+- 编译钩子
+- 嵌套虚拟化
+
+默认的加载器可配置，也能也能构造新的加载器在隔离和约束的上下文中进行代码的执行和加载。
+
+```JavaScript
+// Dynamic loading – ‘System’ is default loader
+System.import('lib/math').then(function(m) {
+  alert("2π = " + m.sum(m.pi, m.pi));
+});
+
+// Create execution sandboxes – new Loaders
+var loader = new Loader({
+  global: fixup(window) // replace ‘console.log’
+});
+loader.eval("console.log('hello world!');");
+
+// Directly manipulate module cache
+System.get('jquery');
+System.set('jquery', Module({$: $})); // WARNING: not yet finalized
+```
+
+### Map + Set + WeakMap + WeakSet
+TODO
+
+### Proxies
+TODO
+
+### Symbols
+TODO
+
+### Subclassable Built-ins
+TODO
+
+### Math + Number + String + Array + Object APIs
+TODO
+
+### Binary and Octal Literals
+TODO
+
+### Promises
+TODO
+
+### Reflect API
+TODO
+
+### Tail Calls
+TODo
