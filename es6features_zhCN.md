@@ -293,20 +293,20 @@ alert("2π = " + ln(e)*pi*2);
 默认的加载器可配置，也能也能构造新的加载器在隔离和约束的上下文中进行代码的执行和加载。
 
 ```JavaScript
-// Dynamic loading – ‘System’ is default loader
+// 动态加载 – ‘System’是默认加载器
 System.import('lib/math').then(function(m) {
   alert("2π = " + m.sum(m.pi, m.pi));
 });
 
-// Create execution sandboxes – new Loaders
+// 创建执行的沙盒 – 新的加载器
 var loader = new Loader({
   global: fixup(window) // replace ‘console.log’
 });
 loader.eval("console.log('hello world!');");
 
-// Directly manipulate module cache
+// 直接操作模块的缓存
 System.get('jquery');
-System.set('jquery', Module({$: $})); // WARNING: not yet finalized
+System.set('jquery', Module({$: $})); // 警告：尚未完成
 ```
 
 ### Map + Set + WeakMap + WeakSet
@@ -322,16 +322,80 @@ TODO
 TODO
 
 ### Math + Number + String + Array + Object APIs
-TODO
+很多新库的加入，包括Math核心库，数组转化助手，字符串助手，还有用来拷贝的Object.assign
+
+```JavaScript
+Number.EPSILON
+Number.isInteger(Infinity) // false
+Number.isNaN("NaN") // false
+
+Math.acosh(3) // 1.762747174039086
+Math.hypot(3, 4) // 5
+Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2
+
+"abcde".includes("cd") // true
+"abc".repeat(3) // "abcabcabc"
+
+Array.from(document.querySelectorAll('*')) // Returns a real Array
+Array.of(1, 2, 3) // Similar to new Array(...), but without special one-arg behavior
+[0, 0, 0].fill(7, 1) // [0,7,7]
+[1, 2, 3].find(x => x == 3) // 3
+[1, 2, 3].findIndex(x => x == 2) // 1
+[1, 2, 3, 4, 5].copyWithin(3, 0) // [1, 2, 3, 1, 2]
+["a", "b", "c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
+["a", "b", "c"].keys() // iterator 0, 1, 2
+["a", "b", "c"].values() // iterator "a", "b", "c"
+
+Object.assign(Point, { origin: new Point(0,0) })
+```
 
 ### Binary and Octal Literals
-TODO
+给binary (`b`)和octal (`o`)增加了两种新的数字字面量形式
+Two new numeric literal forms are added for binary (`b`) and octal (`o`).
+
+```JavaScript
+0b111110111 === 503 // true
+0o767 === 503 // true
+```
 
 ### Promises
-TODO
+
+Promise是一个用于异步编程的库。Promise是将来可能获取到的值的容器。它被使用于很多已有的类库当中。
+
+```JavaScript
+function timeout(duration = 0) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, duration);
+    })
+}
+
+var p = timeout(1000).then(() => {
+    return timeout(2000);
+}).then(() => {
+    throw new Error("hmm");
+}).catch(err => {
+    return Promise.all([timeout(100), timeout(200)]);
+})
+```
 
 ### Reflect API
-TODO
+完整的反射API暴露了对对象在运行级别的元操作。这其实和Proxy刚好相反，它允许在proxy捕获时调用与Proxy API相对应的元操作。在实现proxies时相当有用。
+
+```JavaScript
+// No sample yet
+```
 
 ### Tail Calls
-TODo
+保证在尾部的调用不会导致栈空间无限制地增长。使得在面对无限制的输入时递归算法能保证安全。
+
+```JavaScript
+function factorial(n, acc = 1) {
+    'use strict';
+    if (n <= 1) return acc;
+    return factorial(n - 1, n * acc);
+}
+
+// 在目前大多数的实现中会导致栈溢出,
+// 但在es6中随意的输入也是安全的
+factorial(100000)
+```
