@@ -10,7 +10,7 @@ ES6包括以下特性
 - [arrows 箭头函数](#arrows)
 - [class 类](#classes)
 - [enhanced object literals 增强的对象字面量](#enhanced-object-literals)
-- [template string 模板字符串](#template-string)
+- [template string 模板字符串](#template-strings)
 - [destructuring 解构](#destructuring)
 - [default + rest + spread 关键字](#default--rest--spread)
 - [let + const 关键字](#let--const)
