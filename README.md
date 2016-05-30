@@ -2,7 +2,7 @@
 
 ## 介绍
 
-ECMAScript 6，也被称做ECMAScript 2015，是ECMAScript标准的下一个版本。这个标准预计将在2015年6月被正式批准(然而现在已经是6月份，所以...)。ES6是这门语言的一次重大更新，自ES5以来该语言的首次更新是在2009年。主流Javascript引擎对ES6相关特性的实现[正在进行中](http://kangax.github.io/es5-compat-table/es6/)。
+ECMAScript 6，也被称做ECMAScript 2015，是ECMAScript标准的下一个版本。这个标准预计将于2015年6月被正式批准。ES6是这门语言的一次重大更新，自ES5以来，该语言的首次更新是在2009年。主流Javascript引擎对ES6相关特性的实现也[正在进行中](http://kangax.github.io/es5-compat-table/es6/)。
 
 前往[ES6标准草案](https://people.mozilla.org/~jorendorff/es6-draft.html)查看ECMAScript 6的所有细节
 
@@ -31,7 +31,10 @@ ES6包括以下特性
 
 ## ECMAScript 6 特性
 
-###Arrows 箭头函数
+### Arrows
+
+#### 箭头函数
+
 箭头函数是使用 => 语法简写的函数。在语法上类似C#、Java 8和CoffeeScript中对应的特性。他们同时支持表达式和语句块。和普通函数不同的是，箭头函数和上下文代码共享同一个词法this
 
 ```Javascipt
@@ -57,7 +60,10 @@ var bob = {
 }
 ```
 
-### Class 类
+### Class
+
+#### 类
+
 ES6中提供了一个基于原型的面向对象模式的语法糖。简单的声明方式使得类模式变得更容易使用，增加了类的互用性。类支持原型继承、父方法调用、实例方法、静态方法和构造函数。
 
 ```JavaScript
@@ -86,7 +92,10 @@ class SkinnedMesh extends THREE.Mesh {
 }
 ```
 
-### Enhanced Object Literals 增强的对象字面量
+### Enhanced Object Literals
+
+#### 增强的对象字面量
+
 对象字面量扩展了以下特性，支持在构造时设置原型，`foo: foo`赋值的简写，方法定义，调用父方法，使用表达式计算属性名。同时这些也使得对象字面量和类声明更接近，基于对象的设计也在这种便利中受益。
 
 ```JavaScript
@@ -105,7 +114,10 @@ var obj = {
 };
 ```
 
-### Template Strings 模板字符串
+### Template Strings
+
+#### 模板字符串
+
 模板字符串提供了构建字符串的语法糖。这类似于Perl、Python和其他语言中的字符串插值特性。此外，作为可选项，使用标签可以自定义字符串的构建行为，避免注入攻击，或者基于字符串构建高阶的数据结构。
 
 ```JavaScript
@@ -128,7 +140,10 @@ GET`http://foo.org/bar?a=${a}&b=${b}
       "bar": ${bar}}`(myOnReadyStateChangeHandler);
 ```
 
-### Destructuring 解构
+### Destructuring
+
+#### 解构
+
 解构允许使用模式匹配的绑定，支持数组和对象。解构是Fail-soft的，类似于对象的查找过程`foo["bar"]`，未找到则会对应undefined
 
 ```JavaScript
@@ -158,7 +173,10 @@ var [a = 1] = [];
 a === 1;
 ```
 
-### Default + Rest + Spread 默认参数 + 剩余参数 + 参数展开
+### Default + Rest + Spread
+
+#### 默认参数 + 剩余参数 + 参数展开
+
 支持被调用函数设置参数的默认值。在调用函数时使用`...`可以将一个数组展开后作为参数传入。在定义函数时使用`...`可以将传入的剩余参数转化成一个数组。剩余参数取代了`arguments`的使用，它能以更直接的方式处理大多数问题。
 
 ```JavaScript
@@ -183,7 +201,10 @@ function f(x, y, z) {
 f(...[1,2,3]) == 6
 ```
 
-### Let + Const let和const关键字
+### Let + Const
+
+#### let和const关键字
+
 let和const都是块级作用域的声明方式。`let`是新的`var`。`const`是单次赋值的。`const`的静态限制禁止变量在赋值前使用。
 
 ```JavaScript
@@ -202,7 +223,10 @@ function f() {
 }
 ```
 
-### Iterators + For..Of 迭代器和For..Of
+### Iterators + For..Of
+
+#### 迭代器和For..Of
+
 Iterator对象让javascript拥有了像CLR IEnumerable和Java Iterable一样自定义迭代器的能力。将`for..in`转换成基于迭代器的自定义遍历的`for..of`形式。不需要实现一个类似LINQ中惰性设计模式的数组。
 
 ```JavaScript
@@ -241,13 +265,19 @@ interface Iterable {
 }
 ```
 
-### Generators 生成器
+### Generators
+
+#### 生成器
+
 TODO
 
 ### Unicode
 TODO
 
-### Modules 模块
+### Modules
+
+#### 模块
+
 ES支持从语言层面上使用模块进行组件定义。写法来自流行的Javascript模块加载器(AMD，CommonJS)。运行时的行为由宿主的加载器定义。内部使用了隐式的异步模型 - 在依赖的模块不可用或没处理前，当前模块的代码不会执行
 
 ```JavaScript
@@ -284,7 +314,10 @@ import ln, {pi, e} from "lib/mathplusplus";
 alert("2π = " + ln(e)*pi*2);
 ```
 
-### Module Loaders 模块加载器
+### Module Loaders
+
+#### 模块加载器
+
 模块加载器支持：
 - 动态加载
 - 状态隔离
@@ -379,14 +412,20 @@ var p = timeout(1000).then(() => {
 })
 ```
 
-### Reflect API 反射
+### Reflect API
+
+#### 反射
+
 整个反射接口暴露了对象在运行时级别的元操作。这其实和Proxy刚好相反，它允许在proxy捕获时调用与Proxy接口相对应的元操作。在实现proxies时尤其有用。
 
 ```JavaScript
 // No sample yet
 ```
 
-### Tail Calls 尾调用
+### Tail Calls
+
+#### 尾调用
+
 保证尾调用不会导致栈空间无限制的增长。使得在没有限制输入的时候递归算法也能保证安全。
 
 ```JavaScript
