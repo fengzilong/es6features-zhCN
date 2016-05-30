@@ -60,7 +60,7 @@ var bob = {
 }
 ```
 
-### Class
+### Classes
 
 #### 类
 
