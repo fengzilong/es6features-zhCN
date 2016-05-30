@@ -380,7 +380,7 @@ var p = timeout(1000).then(() => {
 ```
 
 ### Reflect API 反射
-完整的反射API暴露了对对象在运行级别的元操作。这其实和Proxy刚好相反，它允许在proxy捕获时调用与Proxy API相对应的元操作。在实现proxies时相当有用。
+整个反射接口暴露了对象在运行时级别的元操作。这其实和Proxy刚好相反，它允许在proxy捕获时调用与Proxy接口相对应的元操作。在实现proxies时尤其有用。
 
 ```JavaScript
 // No sample yet
