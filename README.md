@@ -269,7 +269,39 @@ interface Iterable {
 
 #### 生成器
 
-TODO
+Generators使用`function*`和`yield`的语法简化了迭代器的书写。一个使用`function*`声明的函数返回一个Generator实例。Generators也是迭代器的一种，但它拥有额外的`next`和`throw`方法。这允许值回到generator中，所以`yield`是一种返回（或抛出）值的表达式形式。
+
+注意：可以用它来进行类似‘await’的异步编程，具体可以查看ES7的`await`提案
+
+```JavaScript
+var fibonacci = {
+  [Symbol.iterator]: function*() {
+    var pre = 0, cur = 1;
+    for (;;) {
+      var temp = pre;
+      pre = cur;
+      cur += temp;
+      yield cur;
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // truncate the sequence at 1000
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+```
+
+generator接口（这里只是使用[TypeScript](http://typescriptlang.org)的类型语法来作说明）
+
+```TypeScript
+interface Generator extends Iterator {
+    next(value?: any): IteratorResult;
+    throw(exception: any);
+}
+```
 
 ### Unicode
 TODO
